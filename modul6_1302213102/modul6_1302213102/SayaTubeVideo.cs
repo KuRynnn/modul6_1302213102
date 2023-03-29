@@ -16,13 +16,23 @@ namespace modul6_1302213102
 
         public SayaTubeVideo(string judul)
         {
+            Debug.Assert(judul != null && judul.Length <= 200, "Judul tidak sesuai syarat");
             title = judul;
             id = rnd.Next(00000,99999);
             playCount = 0;
         }
         public void IncreasePlayCount(int playCount)
         {
-            this.playCount = checked(this.playCount + playCount);
+            try
+            {
+                Debug.Assert(playCount <= 25000000 && playCount >= 0, "Jumlah penayangan tidak sesuai syarat");
+                this.playCount = checked(this.playCount + playCount);
+            }
+            catch
+            {
+                Console.WriteLine("Overflow nih...");
+            }
+            
         }
         public void PrintVideoDetails()
         {
